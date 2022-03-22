@@ -26,8 +26,10 @@ class SlotsGameTest {
 
     @Test
     void setPlayerMax() {
+
     }
 
+    //@Override
     @Test
     void addPlayer() {
         SlotsPlayer player = new SlotsPlayer(new Person("Mike", 1));

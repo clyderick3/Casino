@@ -1,8 +1,11 @@
 package com.github.zipcodewilmington.casino.games.slots;
 
+import com.github.zipcodewilmington.casino.games.BlackJack.BlackJackPlayer;
 import com.github.zipcodewilmington.casino.games.GameInterface.GamblingGame;
 import com.github.zipcodewilmington.casino.games.Person.Player;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -13,8 +16,7 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
     //Variables
     SlotsPlayer player;
     private int maxPartySize;
-
-
+    private Map<BlackJackPlayer, Integer> bets = new HashMap<>();
 
     private int betAmount;
     private boolean playing;
@@ -74,12 +76,12 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
 
     @Override
     public void distributeWinningsToWinners(SlotsPlayer winner) {
-
+        winner.addWinning(bets.get(winner)*7);
     }
 
-    public void distributeWinningsToWinners() {
-
-    }
+//    public void distributeWinningsToWinners() {
+//
+//    }
 
     @Override
     public void play() {
@@ -92,7 +94,7 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
     }
 
     public int getPlayerMax() {
-        return this.maxPartySize;
+        return maxPartySize;
     }
 
     @Override
@@ -102,14 +104,14 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
 
     @Override
     public void addPlayer(SlotsPlayer player) {
-        this.player = player;
-
+        //why does my player show as BlackJack Player.
+        this.bets.put(player,0);
 
     }
 
     @Override
     public void removePlayer(SlotsPlayer player) {
-
+        this.bets.remove(player);
 
     }
 
