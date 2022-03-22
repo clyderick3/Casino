@@ -206,5 +206,4 @@ public class CeeLoGame implements GamblingGame<CeeLoPlayer> {
     @Override
     public void exit() {
     }
-
 }

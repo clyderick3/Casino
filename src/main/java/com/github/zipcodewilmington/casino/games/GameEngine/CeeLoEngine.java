@@ -6,8 +6,6 @@ import com.github.zipcodewilmington.casino.games.ceelo.CeeLoPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.List;
-
 public class CeeLoEngine extends GameEngine<CeeLoPlayer, CeeLoGame> {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
@@ -18,7 +16,7 @@ public class CeeLoEngine extends GameEngine<CeeLoPlayer, CeeLoGame> {
     @Override
     public void start() {
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
-        casinoAccountManager.loadAccounts();
+        casinoAccountManager.loadAccounts("accountsList.db");
         System.out.println("Player 2 enter log-in information.");
         while(getPlayers().size() < 2){
             getPlayers().add(new CeeLoPlayer(casinoAccountManager.accountLogin().getProfile()));

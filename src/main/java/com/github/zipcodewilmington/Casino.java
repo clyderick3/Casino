@@ -18,9 +18,6 @@ import com.github.zipcodewilmington.casino.games.slots.SlotsPlayer;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by leon on 7/21/2020.
  */
@@ -31,7 +28,7 @@ public class Casino implements Runnable {
     public void run() {
         String arcadeDashBoardInput;
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
-        casinoAccountManager.loadAccounts();
+        casinoAccountManager.loadAccounts("accountsList.db");
         do {
             arcadeDashBoardInput = getArcadeDashboardInput();
             if ("select-game".equals(arcadeDashBoardInput)) {
@@ -111,7 +108,7 @@ public class Casino implements Runnable {
                 }
             }
         } while (!"logout".equals(arcadeDashBoardInput));
-        casinoAccountManager.saveAccounts();
+        casinoAccountManager.saveAccounts("accountsList.db");
     }
 
     private String getArcadeDashboardInput() {
