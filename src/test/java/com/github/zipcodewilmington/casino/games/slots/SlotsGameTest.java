@@ -42,6 +42,11 @@ class SlotsGameTest {
 
     @Test
     void removePlayer() {
+        SlotsPlayer player = new SlotsPlayer(new Person("Mike", 1));
+        SlotsGame game = new SlotsGame();
+        game.removePlayer(player);
+        SlotsPlayer actual = game.getPlayer();
+        Assert.assertEquals(actual, player);
     }
 
     @Test

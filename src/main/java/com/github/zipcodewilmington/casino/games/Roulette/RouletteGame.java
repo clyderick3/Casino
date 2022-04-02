@@ -9,7 +9,7 @@ public class RouletteGame implements GamblingGame {
     @Override
     public void setBets () {
         //ask for betting money?
-        //check for bet within avaialble balance
+        //check for bet within available balance
         //ask for no which is odd/even
     }
 

@@ -105,7 +105,7 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
     @Override
     public void addPlayer(SlotsPlayer player) {
         //why does my player show as BlackJack Player.
-        this.bets.put(player,0);
+        //this.bets.put(player,0);
 
     }
 
@@ -124,10 +124,9 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
 
     }
 
-    @Override
-    public SlotsPlayer[] getWinner() {
-        return new SlotsPlayer[0];
-    }
+//    @Override
+//    public SlotsPlayer[] getWinner() {
+//        return new SlotsPlayer[0];
 
     @Override
     public void exit() {
