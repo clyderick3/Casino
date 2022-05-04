@@ -1,14 +1,16 @@
 package com.github.zipcodewilmington.casino;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.lang.reflect.Field;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class CasinoAccountManagerTest {
     CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
+
+    @BeforeAll
+    void setup(){
+        casinoAccountManager.setDbName("bd.bd");
+    }
 
     @Test
     void createAccount() {

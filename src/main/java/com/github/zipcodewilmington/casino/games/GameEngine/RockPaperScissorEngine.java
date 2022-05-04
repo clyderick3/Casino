@@ -6,8 +6,6 @@ import com.github.zipcodewilmington.casino.games.RockPaperScissor.RockPaperSciss
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
-import java.util.List;
-
 public class RockPaperScissorEngine extends GameEngine<RockPaperScissorPlayer, RockPaperScissorGame> {
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
 
@@ -18,7 +16,7 @@ public class RockPaperScissorEngine extends GameEngine<RockPaperScissorPlayer, R
     @Override
     public void start() {
         CasinoAccountManager casinoAccountManager = new CasinoAccountManager();
-        casinoAccountManager.loadAccounts();
+        casinoAccountManager.loadAccounts("accountsList.db");
         System.out.println("Player 2 please enter login information");
         while(getPlayers().size() != 2){
             getPlayers().add(new RockPaperScissorPlayer(casinoAccountManager.accountLogin().getProfile()));

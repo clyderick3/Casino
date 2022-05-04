@@ -1,7 +1,5 @@
 package com.github.zipcodewilmington.casino;
 
-import com.github.zipcodewilmington.casino.games.Person.Person;
-import com.github.zipcodewilmington.casino.games.Person.Player;
 import com.github.zipcodewilmington.utils.AnsiColor;
 import com.github.zipcodewilmington.utils.IOConsole;
 
@@ -18,6 +16,7 @@ public class CasinoAccountManager implements Serializable {
     private static final long serialVersionUID= 1L;
     Map<String, CasinoAccount> casinoAccounts = new HashMap<>();
     private final IOConsole console = new IOConsole(AnsiColor.BLUE);
+    private String dbName = "accountsList.db";
     /**
      * @param accountName     name of account to be returned
      * @param accountPassword password of account to be returned
@@ -46,7 +45,7 @@ public class CasinoAccountManager implements Serializable {
     public CasinoAccount createAccount(String accountName, String accountPassword) {
         CasinoAccount newAccount = new CasinoAccount(accountName, accountPassword);
         registerAccount(newAccount);
-        saveAccounts();
+        saveAccounts(dbName);
         return newAccount;
     }
 
@@ -73,13 +72,13 @@ public class CasinoAccountManager implements Serializable {
 
     public void loadAdminAccount(){
         CasinoAccount adminAccount = new CasinoAccount("admin", "admin");
-        adminAccount.createProfile("admin",Integer.MAX_VALUE);
+        adminAccount.createProfile("admin",999999999);
         casinoAccounts.put("admin",adminAccount);
     }
 
-    public boolean loadAccounts(){
+    public boolean loadAccounts(String dbname){
         try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("accounts.db"));
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dbname));
             Map<String, CasinoAccount> temp = (Map<String,CasinoAccount>) ois.readObject();
             if (temp !=null){
                 casinoAccounts = temp;
@@ -96,9 +95,9 @@ public class CasinoAccountManager implements Serializable {
         return false;
     }
 
-    public boolean saveAccounts(){
+    public boolean saveAccounts(String dbname){
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("accounts.db"));
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(dbname));
             oos.writeObject(casinoAccounts);
             oos.close();
             return true;
@@ -108,6 +107,10 @@ public class CasinoAccountManager implements Serializable {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public void setDbName(String s){
+        this.dbName=s;
     }
 
     public void deleteAccount(CasinoAccount casinoAccount) {
