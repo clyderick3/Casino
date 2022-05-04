@@ -9,21 +9,22 @@ import com.github.zipcodewilmington.casino.games.Person.Player;
  */
 public class SlotsPlayer extends Player implements Gambler {
     public SlotsPlayer(Person person) {
-        super(person); //person currently labeled as private. Get emmm.
+        super(person);
     }
 
     @Override
     public void addWinning(int winning) {
-
-    }
-
-    @Override
-    public void applyBet(int bet) {
-
+        this.getPerson().setWallet(this.getBalance() + winning);
     }
 
     @Override
     public int getBalance() {
-        return 0;
+        return this.getPerson().getWallet();
+    }
+
+    @Override
+    public void applyBet(int bet) {
+        this.getPerson().setWallet(this.getBalance() - bet);
+
     }
 }
