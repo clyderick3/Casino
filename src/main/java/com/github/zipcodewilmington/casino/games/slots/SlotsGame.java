@@ -2,6 +2,8 @@ package com.github.zipcodewilmington.casino.games.slots;
 
 import com.github.zipcodewilmington.casino.games.GameInterface.GamblingGame;
 import com.github.zipcodewilmington.casino.games.Person.Player;
+import com.github.zipcodewilmington.utils.AnsiColor;
+import com.github.zipcodewilmington.utils.IOConsole;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -16,10 +18,15 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
     private static int column1;
     private static int column2;
     private static int column3;
+
     private static int balance = 100; //make it so every bet wages 25.
+
+    private final IOConsole console = new IOConsole(AnsiColor.BLUE);
     private static String[] winners = {"Black Panther", "Iron Man", "Captain America","The Hulk","Thor","Spider-man","Thanos"};
     private static Integer[] payout = {500, 200, 100, 50, 150, 150, 0}; //Casino payout is like Monopoly payout.
     private static SlotsPlayer slotsPlayer ;
+
+    private boolean exitFlag = false;
 
 // Add bets after Are you feeling lucky. Add play again option.
 
@@ -31,13 +38,15 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
 
 
     public void play(){
-        System.out.println(getWelcomeMessage());
-        //while isPlaying. --------
-        slotsPlayer.applyBet(1);
-        spinReels();
-        System.out.println(getSlotResultsMessage());
-        analyzeResults();
-
+        while(!exitFlag) {
+            System.out.println(getWelcomeMessage());
+            //while isPlaying. --------
+            slotsPlayer.applyBet(1);
+            spinReels();
+            System.out.println(getSlotResultsMessage());
+            analyzeResults();
+            exit();
+        }
         //end while isPlaying.
     }
 
@@ -63,8 +72,12 @@ public class SlotsGame implements GamblingGame<SlotsPlayer> {
 
     @Override
     public void exit() {
+            String input = console.getStringInput("Do you want to exit the game?");
+            if (input.equalsIgnoreCase("Yes"))
+                this.exitFlag=true;
 
-    }
+        }
+
 
     public static void analyzeResults(){
         boolean isMatched = column1 == column2 && column1 == column3;
